@@ -15,3 +15,4 @@ public class GameShould {
         Assert.assertEquals(score, game.score());
     }
 }
+
