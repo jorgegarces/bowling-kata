@@ -6,7 +6,7 @@ public class Score {
     private int score;
 
     public void update(int currentPins) {
-        score =+ currentPins;
+        score += currentPins;
     }
 
     @Override
