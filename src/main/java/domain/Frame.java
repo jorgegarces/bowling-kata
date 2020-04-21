@@ -11,6 +11,7 @@ public class Frame {
     }
 
     public void addRoll(int pins) {
+        if(pins > 10) throw new RuntimeException();
         this.pins -= pins;
     }
 }
