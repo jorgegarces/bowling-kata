@@ -44,4 +44,17 @@ public class FrameShould {
 
         Assertions.assertThrows(RuntimeException.class, () -> frame.addRoll(2));
     }
+
+    @Test
+    public void score_4_on_a_roll_of_1_and_a_roll_of_3(){
+
+        Frame frame = new Frame();
+        frame.addRoll(1);
+        frame.addRoll(3);
+        Score score = new Score();
+        score.update(1);
+        score.update(3);
+
+        Assert.assertEquals(score, frame.getScore());
+    }
 }
