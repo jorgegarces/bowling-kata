@@ -34,4 +34,14 @@ public class FrameShould {
 
         Assertions.assertThrows(RuntimeException.class, () -> frame.addRoll(8));
     }
+
+    @Test
+    public void not_allow_more_than_two_rolls_per_frame() {
+
+        Frame frame = new Frame();
+        frame.addRoll(1);
+        frame.addRoll(2);
+
+        Assertions.assertThrows(RuntimeException.class, () -> frame.addRoll(2));
+    }
 }
