@@ -25,4 +25,13 @@ public class FrameShould {
 
         Assertions.assertThrows(RuntimeException.class, ()-> frame.addRoll(11));
     }
+
+    @Test
+    public void not_allow_rolls_higher_than_current_pins(){
+
+        Frame frame = new Frame();
+        frame.addRoll(3);
+
+        Assertions.assertThrows(RuntimeException.class, () -> frame.addRoll(8));
+    }
 }
