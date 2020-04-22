@@ -5,9 +5,9 @@ public class Frame {
     Integer pins = 10;
     Score score = new Score();
     Integer plays = 2;
-   /* domain.FrameStatus status = Status.playable;
+    FrameStatus status = FrameStatus.PLAYABLE;
 
-    playable, strike, spare, finished*/
+    /*playable, strike, spare, finished*/
 
     public Score getScore() {
         score.update(10 - pins);
@@ -19,6 +19,7 @@ public class Frame {
     }
 
     private void updateFrame(int pins) { // conditional checks if its a strike and sets plays and status
+        if(pins == 10) status = FrameStatus.STRIKE;
         updatePlays();
         updatePins(pins);
     }
@@ -42,6 +43,6 @@ public class Frame {
     }
 
     public FrameStatus getStatus() {
-        return null;
+        return status;
     }
 }

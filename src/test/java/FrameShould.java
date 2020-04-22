@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.awt.image.PixelGrabber;
+
 public class FrameShould {
 
     @Test
@@ -66,6 +68,16 @@ public class FrameShould {
         frame.addRoll(10);
 
         Assert.assertEquals(FrameStatus.STRIKE, frame.getStatus());
+    }
+
+    @Test
+    public void change_status_to_spare_if_second_throw_sums_10(){
+
+        Frame frame = new Frame();
+        frame.addRoll(5);
+        frame.addRoll(5);
+
+        Assert.assertEquals(FrameStatus.SPARE, frame.getStatus());
     }
 
 }
