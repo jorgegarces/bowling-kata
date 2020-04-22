@@ -7,8 +7,6 @@ public class Frame {
     Integer plays = 2;
     FrameStatus status = FrameStatus.PLAYABLE;
 
-    /*playable, strike, spare, finished*/
-
     public Score getScore() {
         score.update(10 - pins);
         return score;
@@ -18,10 +16,16 @@ public class Frame {
         if (rollIsValid(pins) && frameIsPlayable()) updateFrame(pins);
     }
 
-    private void updateFrame(int pins) { // conditional checks if its a strike and sets plays and status
-        if(pins == 10) status = FrameStatus.STRIKE;
-        updatePlays();
+    private void updateFrame(int pins) {
         updatePins(pins);
+        updatePlays();
+        updateStatus();
+    }
+
+    private void updateStatus() {
+        if (plays == 1 && this.pins == 0) status = FrameStatus.STRIKE;
+        if (plays == 0 && this.pins > 0) status = FrameStatus.FINISHED;
+        if (plays == 0 && this.pins == 0) status = FrameStatus.SPARE;
     }
 
     private void updatePlays() {
@@ -33,7 +37,7 @@ public class Frame {
     }
 
     private boolean frameIsPlayable() {
-        if (plays == 0) throw new RuntimeException("already played this frame twice");
+        if (plays == 0) throw new RuntimeException("no more throws allowed in this frame");
         return true;
     }
 
