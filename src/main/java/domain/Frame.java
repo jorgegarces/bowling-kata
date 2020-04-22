@@ -4,13 +4,13 @@ public class Frame {
 
     Integer pins = 10;
     Score score = new Score();
-    Integer plays = 2;
+    Integer plays = 0;
     FrameStatus status = FrameStatus.PLAYABLE;
 
     public Score getScore() {
-        score.update(10 - pins);
         return score;
     }
+
 
     public void addRoll(int pins) {
         if (rollIsValid(pins) && frameIsPlayable()) updateFrame(pins);
@@ -20,16 +20,21 @@ public class Frame {
         updatePins(pins);
         updatePlays();
         updateStatus();
+        updateScore(pins);
+    }
+
+    private void updateScore(int pins) {
+        score.update(pins);
     }
 
     private void updateStatus() {
         if (plays == 1 && this.pins == 0) status = FrameStatus.STRIKE;
-        if (plays == 0 && this.pins > 0) status = FrameStatus.FINISHED;
-        if (plays == 0 && this.pins == 0) status = FrameStatus.SPARE;
+        if (plays == 2 && this.pins > 0) status = FrameStatus.FINISHED;
+        if (plays == 2 && this.pins == 0) status = FrameStatus.SPARE;
     }
 
     private void updatePlays() {
-        plays--;
+        plays++;
     }
 
     private void updatePins(int pins) {
@@ -37,7 +42,7 @@ public class Frame {
     }
 
     private boolean frameIsPlayable() {
-        if (plays == 0) throw new RuntimeException("no more throws allowed in this frame");
+        if (plays == 2) throw new RuntimeException("no more throws allowed in this frame");
         return true;
     }
 

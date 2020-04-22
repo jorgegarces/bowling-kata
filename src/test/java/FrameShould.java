@@ -5,8 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.awt.image.PixelGrabber;
-
 public class FrameShould {
 
     @Test
@@ -79,5 +77,4 @@ public class FrameShould {
 
         Assert.assertEquals(FrameStatus.SPARE, frame.getStatus());
     }
-
 }
