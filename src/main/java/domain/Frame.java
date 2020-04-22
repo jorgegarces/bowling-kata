@@ -5,7 +5,7 @@ public class Frame {
     Integer pins = 10;
     Score score = new Score();
     Integer plays = 2;
-   /* FrameStatus status = Status.playable;
+   /* domain.FrameStatus status = Status.playable;
 
     playable, strike, spare, finished*/
 
@@ -39,5 +39,9 @@ public class Frame {
     private boolean rollIsValid(int pins) {
         if(pins > this.pins) throw new RuntimeException("cannot roll higher than current pins");
         return true;
+    }
+
+    public FrameStatus getStatus() {
+        return null;
     }
 }

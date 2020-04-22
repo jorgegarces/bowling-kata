@@ -1,4 +1,5 @@
 import domain.Frame;
+import domain.FrameStatus;
 import domain.Score;
 import org.junit.Assert;
 import org.junit.Test;
@@ -56,6 +57,15 @@ public class FrameShould {
         frame.addRoll(2);
 
         Assertions.assertThrows(RuntimeException.class, () -> frame.addRoll(2));
+    }
+
+    @Test
+    public void change_status_to_strike_if_first_throw_is_10(){
+
+        Frame frame = new Frame();
+        frame.addRoll(10);
+
+        Assert.assertEquals(FrameStatus.STRIKE, frame.getStatus());
     }
 
 }
