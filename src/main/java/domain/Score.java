@@ -9,6 +9,10 @@ public class Score {
         score += points;
     }
 
+    public void update(Score score){
+        this.score += score.score;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
