@@ -2,6 +2,7 @@ import domain.Board;
 import domain.Score;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class BoardShould {
 
@@ -21,7 +22,7 @@ public class BoardShould {
     }
 
     @Test
-    public void sum_scores_of_frames_with_strike_bonus(){
+    public void sum_scores_of_frames_with_strike_bonus() {
 
         Board board = new Board();
         Score testScore = new Score();
@@ -35,7 +36,7 @@ public class BoardShould {
     }
 
     @Test
-    public void sum_scores_of_frames_with_2_consecutive_strike_bonus(){
+    public void sum_scores_of_frames_with_2_consecutive_strike_bonus() {
 
         Board board = new Board();
         Score testScore = new Score();
@@ -50,7 +51,7 @@ public class BoardShould {
     }
 
     @Test
-    public void sum_scores_of_frames_with_spare_bonus(){
+    public void sum_scores_of_frames_with_spare_bonus() {
 
         Board board = new Board();
         Score testScore = new Score();
@@ -62,8 +63,9 @@ public class BoardShould {
 
         Assert.assertEquals(testScore, board.getScore());
     }
+
     @Test
-    public void sum_scores_of_frames_with_2_consecutive_spare_bonuses(){
+    public void sum_scores_of_frames_with_2_consecutive_spare_bonuses() {
 
         Board board = new Board();
         Score testScore = new Score();
@@ -78,8 +80,9 @@ public class BoardShould {
 
         Assert.assertEquals(testScore, board.getScore());
     }
+
     @Test
-    public void sum_scores_of_frames_combining_strike_and_spare_bonuses(){
+    public void sum_scores_of_frames_combining_strike_and_spare_bonuses() {
 
         Board board = new Board();
         Score testScore = new Score();
@@ -93,5 +96,26 @@ public class BoardShould {
         board.addRoll(1);
 
         Assert.assertEquals(testScore, board.getScore());
+    }
+
+    @Test
+    public void not_allow_a_third_throw_on_last_frame_if_first_roll_is_not_a_strike() {
+
+        Board board = new Board();
+
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(10);
+
+        board.addRoll(1);
+        board.addRoll(0);
+
+        Assertions.assertThrows(RuntimeException.class, ()->  board.addRoll(1));
     }
 }
