@@ -34,4 +34,21 @@ public class BoardShould {
 
         Assert.assertEquals(testScore, board.getScore());
     }
+
+    @Test
+    public void sum_scores_of_frames_with_2_consecutive_strike_bonus(){
+
+        Board board = new Board();
+        Score testScore = new Score();
+        testScore.update(50);
+
+        board.addRoll(10);
+        board.addRoll(10);
+        board.addRoll(2);
+        board.addRoll(7);
+
+
+
+        Assert.assertEquals(testScore, board.getScore());
+    }
 }
