@@ -6,11 +6,11 @@ public class Frame {
     Score score = new Score();
     Integer plays = 0;
     FrameStatus status = FrameStatus.PLAYABLE;
+    int bonus = 0;
 
     public Score getScore() {
         return score;
     }
-
 
     public void addRoll(int pins) {
         if (rollIsValid(pins) && frameIsPlayable()) updateFrame(pins);
@@ -28,9 +28,18 @@ public class Frame {
     }
 
     private void updateStatus() {
-        if (plays == 1 && this.pins == 0) status = FrameStatus.STRIKE;
-        if (plays == 2 && this.pins > 0) status = FrameStatus.FINISHED;
-        if (plays == 2 && this.pins == 0) status = FrameStatus.SPARE;
+        if (plays == 1 && this.pins == 0) {
+            status = FrameStatus.STRIKE;
+            bonus = 2;
+        }
+        if (plays == 2 && this.pins > 0) {
+            status = FrameStatus.FINISHED;
+            bonus = 0;
+        }
+        if (plays == 2 && this.pins == 0) {
+            status = FrameStatus.SPARE;
+            bonus = 1;
+        }
     }
 
     private void updatePlays() {
@@ -47,7 +56,7 @@ public class Frame {
     }
 
     private boolean rollIsValid(int pins) {
-        if(pins > this.pins) throw new RuntimeException("cannot roll higher than current pins");
+        if (pins > this.pins) throw new RuntimeException("cannot roll higher than current pins");
         return true;
     }
 
@@ -55,7 +64,12 @@ public class Frame {
         return status;
     }
 
+    public int getBonus() {
+        return bonus;
+    }
+
     public void addBonus(int pins) {
+        --bonus;
         score.update(pins);
     }
 }

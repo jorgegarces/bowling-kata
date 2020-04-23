@@ -1,5 +1,4 @@
 import domain.Board;
-import domain.Frame;
 import domain.Score;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,8 +45,6 @@ public class BoardShould {
         board.addRoll(10);
         board.addRoll(2);
         board.addRoll(7);
-
-
 
         Assert.assertEquals(testScore, board.getScore());
     }
