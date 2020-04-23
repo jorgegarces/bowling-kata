@@ -7,6 +7,7 @@ public class Board {
     List<Frame> playedFrames;
     private Score score;
     private Frame currentFrame;
+    private Frame previousFrame;
 
     public Board() {
         playedFrames = new ArrayList<>();
@@ -17,12 +18,18 @@ public class Board {
     public void addRoll(int pins) {
         checkCurrentFrame();
         currentFrame.addRoll(pins);
+        if (playedFrames.size() > 0 && previousFrameIsAStrike()) previousFrame.addBonus(pins);
+    }
+
+    private boolean previousFrameIsAStrike() {
+        return previousFrame.getStatus() == FrameStatus.STRIKE;
     }
 
     private void checkCurrentFrame() {
         if( currentFrame.getStatus() != FrameStatus.PLAYABLE){
             playedFrames.add(currentFrame);
             currentFrame = new Frame();
+            previousFrame = playedFrames.get(playedFrames.size() - 1);
         }
     }
 

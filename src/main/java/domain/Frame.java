@@ -54,4 +54,8 @@ public class Frame {
     public FrameStatus getStatus() {
         return status;
     }
+
+    public void addBonus(int pins) {
+        score.update(pins);
+    }
 }
