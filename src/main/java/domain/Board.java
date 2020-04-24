@@ -25,7 +25,8 @@ public class Board {
     private void checkCurrentFrame() {
         if( currentFrame.getStatus() != FrameStatus.PLAYABLE){
             playedFrames.add(currentFrame);
-            currentFrame = new Frame();
+            if (playedFrames.size() < 9) currentFrame = new Frame();
+            if (playedFrames.size() == 9) currentFrame = new LastFrame();
         }
     }
 
