@@ -123,14 +123,13 @@ public class BoardShould {
     public void sum_score_of_the_10_frames() {
 
         Score testScore = new Score();
-        testScore.update(1);
+        testScore.update(255);
         Board board = new Board();
 
-        for (int i = 0; i < 10; i++) board.addRoll(10);
+        for (int i = 0; i < 9; i++) board.addRoll(10);
         board.addRoll(5);
+        board.addRoll(0);
 
         Assert.assertEquals(testScore, board.getScore());
     }
-
-
 }

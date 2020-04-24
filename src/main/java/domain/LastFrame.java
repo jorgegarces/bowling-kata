@@ -22,7 +22,7 @@ public class LastFrame extends Frame {
     }
 
     private void updateStatus() {
-        if (plays == 2 && this.pins > 0) {
+        if (plays == 3 || (plays == 2 && strikeCount == 0)) {
             status = FrameStatus.FINISHED;
             bonus = 0;
         }
