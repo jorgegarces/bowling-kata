@@ -116,7 +116,20 @@ public class BoardShould {
         board.addRoll(5);
         board.addRoll(0);
 
-        Assertions.assertThrows(RuntimeException.class, ()->  board.addRoll(1));
+        Assertions.assertThrows(RuntimeException.class, () -> board.addRoll(1));
+    }
+
+    @Test
+    public void sum_score_of_the_10_frames() {
+
+        Score testScore = new Score();
+        testScore.update(1);
+        Board board = new Board();
+
+        for (int i = 0; i < 10; i++) board.addRoll(10);
+        board.addRoll(5);
+
+        Assert.assertEquals(testScore, board.getScore());
     }
 
 

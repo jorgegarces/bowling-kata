@@ -27,6 +27,7 @@ public class Board {
             playedFrames.add(currentFrame);
             if (playedFrames.size() < 9) currentFrame = new Frame();
             if (playedFrames.size() == 9) currentFrame = new LastFrame();
+            if (playedFrames.size() > 9) throw new GameOverException();
         }
     }
 

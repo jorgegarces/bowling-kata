@@ -17,7 +17,15 @@ public class LastFrame extends Frame {
     private void updateFrame(int pins) {
         updatePins(pins);
         updatePlays(pins);
+        updateStatus();
         updateScore(pins);
+    }
+
+    private void updateStatus() {
+        if (plays == 2 && this.pins > 0) {
+            status = FrameStatus.FINISHED;
+            bonus = 0;
+        }
     }
 
     private void updatePins(int pins) {
