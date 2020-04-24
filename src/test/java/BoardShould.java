@@ -113,9 +113,11 @@ public class BoardShould {
         board.addRoll(10);
         board.addRoll(10);
 
-        board.addRoll(1);
+        board.addRoll(5);
         board.addRoll(0);
 
         Assertions.assertThrows(RuntimeException.class, ()->  board.addRoll(1));
     }
+
+
 }
