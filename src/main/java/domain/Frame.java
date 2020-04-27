@@ -2,10 +2,10 @@ package domain;
 
 public class Frame {
 
-    Integer pins = 10;
     Score score = new Score();
-    Integer plays = 0;
     FrameStatus status = FrameStatus.PLAYABLE;
+    Integer pins = 10;
+    Integer plays = 0;
     int bonus = 0;
 
     public Score getScore() {
