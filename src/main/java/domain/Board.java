@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    List<Frame> playedFrames;
-    private Score score;
+    private final List<Frame> playedFrames;
+    private final Score score;
     private Frame currentFrame;
 
     public Board() {
@@ -15,27 +15,45 @@ public class Board {
     }
 
     public void addRoll(int pins) {
-        checkCurrentFrame();
+        manageCurrentFrame();
         currentFrame.addRoll(pins);
+        checkForBonus(pins);
+    }
+
+    private void manageCurrentFrame() {
+        if(isFramePlayable()) manageFrame();
+    }
+
+    private boolean isFramePlayable() {
+        return currentFrame.getStatus() != FrameStatus.PLAYABLE;
+    }
+
+    private void manageFrame() {
+        playedFrames.add(currentFrame);
+        if(gameIsNotOver()) createNewFrame();
+    }
+
+    private boolean gameIsNotOver() {
+        if (playedFrames.size() > 9) throw new GameOverException();
+        return true;
+    }
+
+    private void createNewFrame() {
+        if (playedFrames.size() < 9) currentFrame = new Frame();
+        if (playedFrames.size() == 9) currentFrame = new LastFrame();
+    }
+
+    private void checkForBonus(int pins) {
         for (Frame frame : playedFrames) {
             if (frame.getBonus() > 0) frame.addBonus(pins);
         }
     }
 
-    private void checkCurrentFrame() {
-        if( currentFrame.getStatus() != FrameStatus.PLAYABLE){
-            playedFrames.add(currentFrame);
-            if (playedFrames.size() < 9) currentFrame = new Frame();
-            if (playedFrames.size() == 9) currentFrame = new LastFrame();
-            if (playedFrames.size() > 9) throw new GameOverException();
-        }
-    }
-
     public Score getScore() {
+        playedFrames.add(currentFrame);
         for (Frame frame : playedFrames) {
             score.update(frame.getScore());
         }
-        score.update(currentFrame.getScore());
         return score;
     }
 }
