@@ -103,16 +103,7 @@ public class BoardShould {
 
         Board board = new Board();
 
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-        board.addRoll(10);
-
+        for (int i = 0; i < 9; i++) board.addRoll(10);
         board.addRoll(5);
         board.addRoll(0);
 
